@@ -49,7 +49,8 @@ class AuthController extends BaseController
             'UserEmail' => $user['UserEmail'],
             'UserVerified' => $user['UserVerified'],
             'UserActive' => $user['UserActive'],
-            'UserType_FK' => $user['UserType_FK'],
+            'UserType' => $user['UserType'],
+            'UserAva' => $user['UserAva'],
             'isLoggedIn' => true,
         ];
         session()->set($data);
@@ -104,9 +105,9 @@ class AuthController extends BaseController
                     'UserInstagram' => $this->request->getVar('UserInstagram'),
                     'UserFanart' => $fanartName,
                     'UserReason' => $this->request->getVar('UserReason'),
+                    'UserType' => 'Member',
                     'UserVerified' => '0',
                     'UserActive' => '1',
-                    'UserType_FK' => '3',
                     'UserAva' => 'def_ava.png',
                 ];
                

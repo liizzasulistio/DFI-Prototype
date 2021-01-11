@@ -26,6 +26,19 @@ class Filters extends BaseConfig
 		],
 		'after'  => [
 			'toolbar',
+			'authfilter' => ['except' => [
+				'/', 'PageController/index',
+				'/dashboard', 'PageController/dashboard',
+				'/profile', 'PageController/profile',
+				'/edit-profile', 'PageController/update',
+				'/logout', 'PageController/logout',
+				'/project', 'ProjectController/index',
+				// '/project', 'ProjectController/read',
+				'/project/(:segment)', 'ProjectController/detail/$1',
+				'/add-project', 'ProjectController/create',
+				'/edit-project', 'ProjectController/update',
+				'/member', 'MemberController/index',
+			]]
 			
 			//'honeypot'
 		],

@@ -12,7 +12,7 @@
                 <div class="row mb-10">
                 <div class="col-4">
                     <ul>
-                    <li><img src="images/<?= $user['UserAva']?>" class="ava mx-auto d-block"></li><!-- Jangan lupa ganti jadi avanya user -->
+                    <li><img src="images/<?= $user['UserAva']?>" class="ava mx-auto d-block"></li>
                     <li class="mt-3"><?= $user['UserName']?></li>
                     <li><?= Time::parse($user['created_at'])->toDateString() ?></li>
                     <hr>

@@ -3,6 +3,12 @@ use App\Models\UserModel;
 
 class PageController extends BaseController
 {
+    protected $UserModel;
+    public function __construct()
+    {
+        $this->UserModel = new UserModel();
+    }
+
     public function index()
     {
         $data = [
@@ -32,29 +38,44 @@ class PageController extends BaseController
 
     public function update()
     {
-        $model = new UserModel();
+        // $model = new UserModel();
+        $oldUsername = $this->UserModel->getUser($this->request->getVar('UserUsername'));
         $data = [
             'title' => 'Edit Profile',
-            'member' => $model->getUser(),
         ];
         helper(['form']);
-       
+      
 
         if($this->request->getMethod() == 'post')
         {
-
+           
+           // $usernameRule = 'required|is_unique[users.UserUsername]|min_length[4]|max_length[15]';
+            if($oldUsername['UserUsername'] == $this->request->getVar('UserUsername'))
+            {
+                $usernameRule = 'required';
+             //   return $usernameRule;
+               // return $user;
+            } 
+            else
+            {
+                $usernameRule = 'required|is_unique[users.UserUsername]|min_length[4]|max_length[15]';
+//return $usernameRule;
+               // return false;
+                // 'required|is_unique[users.UserUsername,UserID,{UserID}]|min_length[4]|max_length[15]'
+            }
             
+            // $id = session()->get('UserID');
             //validation
             $rules = [
                 'UserName' => 'required',
                 'UserEmail' => 'required|valid_email',
-                'UserUsername' => 'required|min_length[4]|max_length[15]',
+                'UserUsername' => $usernameRule,
                 'UserHometown' => 'required',
                 'UserBirthday' => 'required',
                 'UserTwitter' => 'required',
                 'UserInstagram' => 'required',
                 'UserAva' => 'max_size[UserAva,1024]|is_image[UserAva]|mime_in[UserAva,image/jpg,image/jpeg,image/png]',
-                'UserBio' => 'required|max_length[100]',
+                'UserBio' => 'min_length[0]|max_length[100]',
             ];
 
             if($this->request->getPost('UserPassword') != '')
@@ -72,7 +93,8 @@ class PageController extends BaseController
                 $avaFile = $this->request->getFile('UserAva');
                 if($avaFile->getError() == 4)
                 {
-                    $avaName = 'def_ava.png';
+                   $avaName = session()->get('UserAva');
+                    
                 }
                 else
                 {
@@ -81,7 +103,7 @@ class PageController extends BaseController
                 }
                 
                 //store the user in database
-                $model = new UserModel();
+                //$model = new UserModel();
                 $newData = [
                     'UserID' => session()->get('UserID'),
                     'UserName' => $this->request->getPost('UserName'),
@@ -100,12 +122,13 @@ class PageController extends BaseController
                     $newData['UserPassword'] = $this->request->getPost('UserPassword');
                 }
         
-                $model->save($newData);
+                $this->UserModel->save($newData);
                 session()->setFlashdata('success', 'Successfuly Updated');
 				return redirect()->to('/profile');
             }
         }
-        $data['user'] = $model->where('UserID', session()->get('UserID'))->first();
+
+        $data['user'] = $this->UserModel->where('UserID', session()->get('UserID'))->first();
         return view('page/update', $data);
     }
 }

@@ -17,11 +17,11 @@ class UserModel extends Model
         'UserInstagram',
         'UserFanart',
         'UserReason',
+        'UserType',
         'UserAva',
         'UserBio',
         'UserVerified',
         'UserActive',
-        'UserType_FK'
     ];
     protected $beforeInsert = ['beforeInsert'];
     protected $beforeUpdate = ['beforeUpdate'];
@@ -44,11 +44,20 @@ class UserModel extends Model
         return $data;
     }
 
+    // public function getUser($UserUsername = false)
+    // {
+    //     if($UserUsername == false)
+    //     {
+    //         return $this->db->table('users')->join('users_type', 'users.UserType_FK = users_type.UserTypeID')->get()->getResultArray();
+    //     }
+    //     return $this->where(['UserUsername' => $UserUsername])->first();
+    // }
+
     public function getUser($UserUsername = false)
     {
         if($UserUsername == false)
         {
-            return $this->db->table('users')->join('users_type', 'users.UserType_FK = users_type.UserTypeID')->get()->getResultArray();
+            return $this->findAll();
         }
         return $this->where(['UserUsername' => $UserUsername])->first();
     }

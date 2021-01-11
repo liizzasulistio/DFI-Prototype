@@ -16,6 +16,11 @@
                     <label for="UserPassword">Password</label>
                     <input type="password" class="form-control" name="UserPassword">
                 </div>
+                <?php if (isset($validation)) : ?>
+                <div class="alert alert-danger mt-2" role="alert">
+                        Username or Email and Password doesn't match.
+                    </div>
+                <?php endif; ?>    
                 <div class="row">
                     <div class="col-12 mb-1 justify-content-center">
                         <a href="#">Forgot password?</a> |

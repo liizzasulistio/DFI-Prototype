@@ -17,7 +17,8 @@ class AuthFilter implements FilterInterface
     {
         if(session()->get('isLoggedIn') == true)
         {
-            return redirect()->to('dashboard');
+            // return redirect()->to('dashboard');
+            //  return redirect()->to('');
         }
     }
 }

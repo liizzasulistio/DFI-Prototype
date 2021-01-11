@@ -34,7 +34,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="UserType">User Type</label>
-                        <input type="text" class="form-control" name="UserType" id="UserType" value="<?=($user['UserType_FK'])?>" disabled readonly>
+                        <input type="text" class="form-control" name="UserType" id="UserType" value="<?=($user['UserType'])?>" disabled readonly>
                     </div>
                 </div>
                 </div>
@@ -121,7 +121,7 @@
                 <div class="col-sm-6">
                     <div class="form-group mb-3">
                         <label for="UserBio">Introduction</label>
-                        <textarea type="text" class="form-control" name="UserBio" id="UserBio" style="height: 107px;"><?= set_value('UserBio', $user['UserBio']) ?></textarea>
+                        <textarea type="text" class="form-control" name="UserBio" id="UserBio" style="height: 107px;"><?php if($user['UserBio']) : ?><?= set_value('UserBio', $user['UserBio']) ?><?php endif; ?></textarea>
                     </div>
                     <div class="col-12 d-grid gap-2 d-md-flex justify-content-md-end">
                         <button type="submit" class="btn btn-primary">Save Changes</button>

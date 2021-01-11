@@ -10,26 +10,32 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    
+    <!-- Show Navigation Bar if User Login -->
     <?php if(session()->get('isLoggedIn')): ?>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link <?= ($uri->getSegment(1) == 'dashboard' ? 'active' : null) ?> nav-text" href="/dashboard">Dashboard</a>
         <a class="nav-link <?= ($uri->getSegment(1) == 'project' ? 'active' : null) ?> nav-text" href="/project">Project</a>
-       
-       
-        <ul class="navbar-nav">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle nav-text" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <?= session()->get('UserUsername')?>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li><a class="dropdown-item" href="/profile">My Profile</a></li>
-              <li><a class="dropdown-item" href="/edit-profile">Edit Profile</a></li>
-              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Logout</a></li>
+        <a class="nav-link <?= ($uri->getSegment(1) == 'member' ? 'active' : null) ?> nav-text" href="/member">Member</a>
+        <a class="nav-link <?= ($uri->getSegment(1) == 'report' ? 'active' : null) ?> nav-text" href="/report">Report</a>
+      </div>
+      </div>
+
+      <!-- Dropdown Menu -->
+          <ul class="navbar-nav justify-content-end">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle nav-text" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img class="ava" src="<?=base_url('images/'.session()->get('UserAva'));?>" width="30" height="30"> <?= session()->get('UserUsername')?>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="dropdown-item" href="/profile">My Profile</a></li>
+                <li><a class="dropdown-item" href="/edit-profile">Edit Profile</a></li>
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Logout</a></li>
+            </ul>
+          </li>
           </ul>
-        </li>
-        </ul>
-      
+   
       <!-- Modal -->
       <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">

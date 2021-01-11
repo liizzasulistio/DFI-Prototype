@@ -37,6 +37,18 @@ $routes->get('/logout', 'AuthController::logout');
 $routes->get('/dashboard', 'PageController::dashboard');
 $routes->get('/profile', 'PageController::profile');
 $routes->match(['get', 'post'], '/edit-profile', 'PageController::update');
+$routes->get('/project', 'ProjectController::index');
+//$routes->get('/project/(:segment)', 'ProjectController::read/$1');
+// $routes->get('/project/(:segment)', 'ProjectController::detail/$1');
+//$routes->get('/project/(:segment)', 'ProjectController::detail/$1');
+// $routes->get('/project/detail', 'ProjectController::read');
+$routes->match(['get', 'post'], '/add-project', 'ProjectController::create');
+$routes->match(['get', 'post'], '/save-project', 'ProjectController::save');
+$routes->match(['get', 'post'], '/edit-project/(:segment)', 'ProjectController::update/$1');
+$routes->get('/delete-project/(:segment)', 'ProjectController::delete/$1');
+//$routes->get('/add-project', 'ProjectController::create');
+// $routes->get('/ProjectController/save', 'ProjectController::save');
+$routes->get('/member', 'MemberController::index');
 
 /**
  * --------------------------------------------------------------------
