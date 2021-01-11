@@ -11,6 +11,21 @@
         ?>
         <!-- <a href="/add-project" class="btn btn-success">Add Project</a> -->
     </div>
+  <div class="row">
+  <div class="col">
+  <form method="get">
+  <div class="input-group mb-2 mt-2">
+    <input type="text" class="form-control" placeholder="Search Project Title or Category" name="keyword">
+    <button class="btn btn-outline-secondary" type="submit" name="submit">Search</button>
+  </div>
+  </form>
+  </div>
+
+
+
+
+
+  </div>
 <?php if(session()->getFlashdata('message')) : ?>
   <div class="alert alert-light mt-2" role="alert">
     <?= session()->getFlashdata('message'); ?>

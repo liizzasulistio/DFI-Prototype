@@ -33,5 +33,12 @@ class ProjectModel extends Model
         return $this->where(['slug' => $slug])->first();
     }    
 
+    public function search($keyword)
+    {
+        // $builder = $this->table('projects');
+        // $builder->like('ProjectTitle', $keyword);
+        // return $builder;
+        return $this->table('projects')->like('ProjectTitle', $keyword)->orLike('CategoryName', $keyword);
+    }
 
 }

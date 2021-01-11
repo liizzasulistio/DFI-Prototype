@@ -18,11 +18,21 @@ class ProjectController extends BaseController
     public function index()
     {
         $currentPage = $this->request->getVar('page_project') ? $this->request->getVar('page_project') : 1;
+        $keyword = $this->request->getVar('keyword');
+
+        if($keyword)
+        {
+            $project = $this->ProjectModel->search($keyword);
+        }
+        else
+        {
+            $project = $this->ProjectModel;
+        }
        // $projectID = $this->request->getPost('ProjectID');
         $data = [
            'title' => 'Project',
            //'project' => $this->ProjectModel->getProject(),
-            'project' => $this->ProjectModel->join('categories', 'projects.ProjectCategory_FK = categories.CategoryID')->paginate(10, 'project'),
+            'project' => $project->join('categories', 'projects.ProjectCategory_FK = categories.CategoryID')->paginate(10, 'project'),
            // 'participant' => $this->ParticipantModel->getParticipant(),
         //    'participant' => $this->ParticipantModel->query("SELECT users.UserUsername
         //    FROM participants
